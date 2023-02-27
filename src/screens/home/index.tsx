@@ -1,36 +1,39 @@
-import { StyleSheet } from "react-native";
-import { View, ScrollView, Button, Text } from "@/components/Themed";
+import { StyleSheet, RefreshControl, Pressable, Linking } from "react-native";
+import { View, ScrollView, Button } from "@/components/Themed";
 import { Box, Spinner } from "native-base";
-import { RefreshControl } from "react-native";
+import { Image } from "native-base";
 import { RootTabScreenProps } from "~/types";
 import React from "react";
-import Header from '@/components/Header';
+import Header from "@/components/Header";
 import PostCard from "./components/PostCard";
 import { getContentList } from "@/api/request";
 import Empty from "@/components/Empty";
 import { useNavigation } from "@react-navigation/native";
 import useDebounce from "@/hooks/useDebounce";
 import Fab from "./components/Fab";
+import Layout from "@/constants/Layout";
+import BaseUrl from "@/constants/BaseUrl";
+
+const banner = require("@/assets/images/banner.png");
 
 const pageSize = 20;
 
 export default function Home({ navigation }: RootTabScreenProps<"Home">) {
-
   const [page, setPage] = React.useState(1);
   const [contentList, setContentList] = React.useState<any[]>([]);
-  const [refreshing, setRefreshing] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
-  const [loadEnd, setLoadEnd] = React.useState(false)
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [loadEnd, setLoadEnd] = React.useState(false);
 
   const [search, setSearch] = React.useState("");
   const debounceSearch = useDebounce(search, 500);
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState("");
 
   React.useEffect(() => {
     setQuery(debounceSearch);
     setPage(1);
     setContentList([]);
-  }, [debounceSearch])
+  }, [debounceSearch]);
 
   const fetchHandle = React.useCallback(async () => {
     setLoading(true);
@@ -42,9 +45,9 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
     if (page === 1) {
       setContentList(res);
     } else {
-      setContentList(p => {
+      setContentList((p) => {
         return p.concat(res);
-      })
+      });
     }
 
     if (res.length < pageSize) {
@@ -52,11 +55,11 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
     }
     setLoading(false);
     setRefreshing(false);
-  }, [query, page])
+  }, [query, page]);
 
   React.useEffect(() => {
-    fetchHandle()
-  }, [fetchHandle])
+    fetchHandle();
+  }, [fetchHandle]);
 
   const [fristShow, setFristShow] = React.useState(false);
   const [show, setShow] = React.useState(false);
@@ -76,10 +79,10 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
       var contentSizeHeight = Math.round(e.nativeEvent.contentSize.height); // 可滚动的总高度
       if (Math.round(offsetY + oriageScrollHeight) >= contentSizeHeight - 50) {
         setShow(true);
-        setPage(p => p+1)
+        setPage((p) => p + 1);
       }
     },
-    [loadEnd, loading, refreshing, setPage, fristShow, ]
+    [loadEnd, loading, refreshing, setPage, fristShow]
   );
 
   const onRefresh = React.useCallback(() => {
@@ -89,21 +92,23 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
     } else {
       setPage(1);
     }
-  }, [page, fetchHandle])
+  }, [page, fetchHandle]);
 
   return (
     <View style={styles.container}>
       <Fab show={show} setShow={setShow} />
-       {/* <Fab renderInPortal={false} shadow={2} placement="top-right"  size="4" icon={
+      {/* <Fab renderInPortal={false} shadow={2} placement="top-right"  size="4" icon={
         <Text>点击赚钱</Text>
       } /> */}
-      <Header search={{
-        placeholder: 'Buscar publicaciones',
-        value: search,
-        onChangeText: (_text) => {
-          setSearch(_text);
-        }
-      }} />
+      <Header
+        search={{
+          placeholder: "Buscar publicaciones",
+          value: search,
+          onChangeText: (_text) => {
+            setSearch(_text);
+          },
+        }}
+      />
       <ScrollView
         style={styles.container}
         scrollEventThrottle={16}
@@ -113,19 +118,29 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
         onScroll={onContentViewScroll}
       >
         <Box mt="2">
-          {
-            contentList.map(item => {
-              return <PostCard key={item.id} info={item} />
-            })
-          }
-          {
-            loading && <Spinner />
-          }
-          {
-           !loading && contentList.length === 0 &&  <Empty />
-          }
+          {contentList.map((item) => {
+            return <PostCard key={item.id} info={item} />;
+          })}
+          {loading && <Spinner />}
+          {!loading && contentList.length === 0 && <Empty />}
         </Box>
       </ScrollView>
+      {fristShow && (
+        <Box position="absolute" bottom={0} left="8px" zIndex={999}>
+          <Pressable
+            onPress={() => {
+              Linking.openURL(BaseUrl.downloadAndroid);
+            }}
+          >
+            <Image
+              source={banner}
+              alt="banner"
+              width={Layout.window.width - 16}
+              height={(Layout.window.width - 16) / 3.5}
+            />
+          </Pressable>
+        </Box>
+      )}
     </View>
   );
 }
