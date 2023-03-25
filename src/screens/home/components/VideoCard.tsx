@@ -8,7 +8,7 @@ import { Center, Pressable, Image, View } from "native-base";
 import BaseUrl from "@/constants/BaseUrl";
 import Layout from "@/constants/Layout";
 import Breakpoints from "@/constants/Breakpoints";
-import { AppEventsLogger } from "react-native-fbsdk-next";
+import { FACEBOOK_EVENT, fbEvent } from "@/utils";
 
 const video1 = require("@/assets/video1.mp4");
 const video2 = require("@/assets/video2.mp4");
@@ -33,9 +33,10 @@ const VideoCard = ({
   const facebookHandle = React.useCallback(async () => {
     try {
       // Settings.initializeSDK();
-      AppEventsLogger.logEvent("Click 24H Trade by video", {
-        date: new Date().toString(),
-      });
+      // AppEventsLogger.logEvent("Click 24H Trade by video", {
+      //   date: new Date().toString(),
+      // });
+      fbEvent(FACEBOOK_EVENT.CLICK_BY_VIDEO);
     } catch (error) {
       console.error(error);
     }

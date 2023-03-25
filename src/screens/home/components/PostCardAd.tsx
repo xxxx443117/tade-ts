@@ -11,7 +11,7 @@ import { shortenAddress } from "@/utils/address";
 import BaseUrl from "@/constants/BaseUrl";
 import Layout from "@/constants/Layout";
 import Breakpoints from "@/constants/Breakpoints";
-import { AppEventsLogger } from "react-native-fbsdk-next";
+import { FACEBOOK_EVENT, fbEvent } from "@/utils";
 
 const p1 = require("@/assets/images/ad/p1.jpg");
 const p2 = require("@/assets/images/ad/p2.jpg");
@@ -62,9 +62,10 @@ const PostCard = ({ type }: { type: 1 | 2 }) => {
   const facebookHandle = React.useCallback(async () => {
     try {
       // Settings.initializeSDK();
-      AppEventsLogger.logEvent("Click 24H Trade by image", {
-        date: new Date().toString(),
-      });
+      // AppEventsLogger.logEvent("Click 24H Trade by image", {
+      //   date: new Date().toString(),
+      // });
+      fbEvent(FACEBOOK_EVENT.CLICK_BY_IMAGE);
     } catch (error) {
       console.error(error);
     }
