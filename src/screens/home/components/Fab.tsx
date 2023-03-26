@@ -12,7 +12,7 @@ import { StyleSheet, Linking, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React, { useRef } from "react";
 import BaseUrl from "@/constants/BaseUrl";
-import { FACEBOOK_EVENT, fbEvent } from "@/utils";
+import { FACEBOOK_EVENT, fbEvent, openUrl } from "@/utils";
 
 // const dollar = require('@/assets/images/dollar.png')
 // const profit = require('@/assets/images/profit.png')
@@ -143,7 +143,7 @@ const Fab: React.FC<FabProps> = ({ show, setShow, showBox }) => {
                 <Pressable
                   marginTop="32px"
                   onPress={() => {
-                    Linking.openURL(BaseUrl.downloadAndroid);
+                    openUrl(BaseUrl.downloadAndroid);
                     facebookHandle();
                   }}
                 >
@@ -176,7 +176,7 @@ const Fab: React.FC<FabProps> = ({ show, setShow, showBox }) => {
             onPress={() => {
               if (!fristClose) {
                 setFristClose(true);
-                Linking.openURL(BaseUrl.downloadAndroid);
+                openUrl(BaseUrl.downloadAndroid);
                 return;
               }
               setShow(false);

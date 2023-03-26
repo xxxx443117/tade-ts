@@ -11,7 +11,7 @@ import { shortenAddress } from "@/utils/address";
 import BaseUrl from "@/constants/BaseUrl";
 import Layout from "@/constants/Layout";
 import Breakpoints from "@/constants/Breakpoints";
-import { FACEBOOK_EVENT, fbEvent } from "@/utils";
+import { FACEBOOK_EVENT, fbEvent, openUrl } from "@/utils";
 
 const p1 = require("@/assets/images/ad/p1.jpg");
 const p2 = require("@/assets/images/ad/p2.jpg");
@@ -93,7 +93,7 @@ const PostCard = ({ type }: { type: 1 | 2 }) => {
           onPress={() => {
             // navigate('Detail', { id: `${type}` })
             facebookHandle();
-            Linking.openURL(BaseUrl.downloadAndroid);
+            openUrl(BaseUrl.downloadAndroid);
           }}
         >
           <Box>

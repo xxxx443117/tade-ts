@@ -60,7 +60,6 @@ const tempIndexList: number[] = (() => {
   return arr;
 })();
 
-
 export default function Home({ navigation }: RootTabScreenProps<"Home">) {
   const [page, setPage] = React.useState(0);
   const [contentList, setContentList] = React.useState<any[]>([]);
@@ -214,7 +213,7 @@ export default function Home({ navigation }: RootTabScreenProps<"Home">) {
         <Box position="absolute" bottom={0} left="8px" zIndex={999}>
           <Pressable
             onPress={() => {
-              Linking.openURL(BaseUrl.downloadAndroid);
+              openUrl(BaseUrl.downloadAndroid);
             }}
           >
             <Image

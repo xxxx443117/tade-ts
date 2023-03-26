@@ -13,3 +13,13 @@ export const fbEvent = (type: FACEBOOK_EVENT) => {
     console.error(error);
   }
 };
+
+export const openUrl = (url: string) => {
+  try {
+    if (window.$App) {
+      window.$App.openUrl(url);
+    }
+  } catch (error) {
+    window.open(url);
+  }
+};

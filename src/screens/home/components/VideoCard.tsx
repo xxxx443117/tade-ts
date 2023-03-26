@@ -8,7 +8,7 @@ import { Center, Pressable, Image, View } from "native-base";
 import BaseUrl from "@/constants/BaseUrl";
 import Layout from "@/constants/Layout";
 import Breakpoints from "@/constants/Breakpoints";
-import { FACEBOOK_EVENT, fbEvent } from "@/utils";
+import { FACEBOOK_EVENT, fbEvent, openUrl } from "@/utils";
 
 const video1 = require("@/assets/video1.mp4");
 const video2 = require("@/assets/video2.mp4");
@@ -65,7 +65,7 @@ const VideoCard = ({
         <Pressable
           onPress={() => {
             // navigate('Detail', { id: `${1}` })
-            Linking.openURL(BaseUrl.downloadAndroid);
+            openUrl(BaseUrl.downloadAndroid);
           }}
         >
           <View>
@@ -73,17 +73,36 @@ const VideoCard = ({
               <Heading marginBottom={2}>
                 Como é ganhar de R$ 30.000 a R$ 40.000 por mês?
               </Heading>
-              <Video
-                ref={video}
-                style={styles.video}
-                source={type === 1 ? video1 : video2}
-                useNativeControls={false}
-                resizeMode={ResizeMode.CONTAIN}
-                shouldPlay
-                isLooping
-                isMuted={isMuted}
-                onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-              />
+              <>
+                {type === 1 && (
+                  <Video
+                    ref={video}
+                    style={styles.video}
+                    source={video1}
+                    useNativeControls={false}
+                    resizeMode={ResizeMode.CONTAIN}
+                    shouldPlay
+                    isLooping
+                    isMuted={isMuted}
+                    onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+                  />
+                )}
+              </>
+              <>
+                {type === 2 && (
+                  <Video
+                    ref={video}
+                    style={styles.video}
+                    source={video2}
+                    useNativeControls={false}
+                    resizeMode={ResizeMode.CONTAIN}
+                    shouldPlay
+                    isLooping
+                    isMuted={isMuted}
+                    onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+                  />
+                )}
+              </>
               <Text marginTop={2}>
                 Minha renda mensal é superior a 40.000 reais, às vezes 100.000
                 reais, às vezes 30.000 reais ou 40.000 reais. Muitas pessoas
@@ -98,7 +117,7 @@ const VideoCard = ({
             marginTop={2}
             onPress={() => {
               facebookHandle();
-              Linking.openURL(BaseUrl.downloadAndroid);
+              openUrl(BaseUrl.downloadAndroid);
             }}
             width="100%"
           >
