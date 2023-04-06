@@ -81,6 +81,7 @@ const VideoCard = ({
                     source={video1}
                     useNativeControls={false}
                     resizeMode={ResizeMode.CONTAIN}
+                    videoStyle={styles.videoStyle}
                     shouldPlay
                     isLooping
                     isMuted={isMuted}
@@ -94,8 +95,9 @@ const VideoCard = ({
                     ref={video}
                     style={styles.video}
                     source={video2}
+                    videoStyle={styles.videoStyle}
                     useNativeControls={false}
-                    resizeMode={ResizeMode.CONTAIN}
+                    resizeMode={ResizeMode.STRETCH}
                     shouldPlay
                     isLooping
                     isMuted={isMuted}
@@ -148,9 +150,14 @@ const styles = StyleSheet.create({
   },
   // bgColor='backgroundCard' paddingY={2} mb={2} width="100%"
   video: {
+    // flex: 1,
     height: Layout.window.width - Breakpoints.LayoutPaddingX * 2,
     width: Layout.window.width - Breakpoints.LayoutPaddingX * 2,
   },
+  videoStyle: {
+    width: '100%',
+    height: '100%',
+  }
 });
 
 export default VideoCard;
