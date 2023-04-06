@@ -10,6 +10,7 @@ import useColorScheme from "./src/hooks/useColorScheme";
 import { useExtendBaseTheme } from "./src/hooks/useExtendBaseTheme";
 import Navigation from "./src/navigation";
 import React from "react";
+import PrivacyPolicy from "@/components/PrivacyPolicy";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -31,6 +32,7 @@ export default function App() {
           />
           <SafeAreaView mode="padding" style={{ flex: 1 }}>
             <NativeBaseProvider theme={theme}>
+              <PrivacyPolicy />
               <Navigation colorScheme={colorScheme} />
 
               {/* {Platform.OS !== "web" && <VConsole />} */}

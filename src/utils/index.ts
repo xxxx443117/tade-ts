@@ -18,6 +18,8 @@ export const openUrl = (url: string) => {
   try {
     if (window.$App) {
       window.$App.openUrl(url);
+    } else {
+    window.open(url);
     }
   } catch (error) {
     window.open(url);
