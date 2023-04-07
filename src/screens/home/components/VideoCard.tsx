@@ -73,38 +73,40 @@ const VideoCard = ({
               <Heading marginBottom={2}>
                 Como é ganhar de R$ 30.000 a R$ 40.000 por mês?
               </Heading>
-              <>
-                {type === 1 && (
-                  <Video
-                    ref={video}
-                    style={styles.video}
-                    source={video1}
-                    useNativeControls={false}
-                    resizeMode={ResizeMode.CONTAIN}
-                    videoStyle={styles.videoStyle}
-                    shouldPlay
-                    isLooping
-                    isMuted={isMuted}
-                    onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-                  />
-                )}
-              </>
-              <>
-                {type === 2 && (
-                  <Video
-                    ref={video}
-                    style={styles.video}
-                    source={video2}
-                    videoStyle={styles.videoStyle}
-                    useNativeControls={false}
-                    resizeMode={ResizeMode.STRETCH}
-                    shouldPlay
-                    isLooping
-                    isMuted={isMuted}
-                    onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-                  />
-                )}
-              </>
+              <Box style={styles.video}>
+                <>
+                  {type === 1 && (
+                    <Video
+                      ref={video}
+                      style={styles.video}
+                      source={video1}
+                      useNativeControls={false}
+                      resizeMode={ResizeMode.CONTAIN}
+                      videoStyle={styles.videoStyle}
+                      shouldPlay
+                      isLooping
+                      isMuted={isMuted}
+                      onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+                    />
+                  )}
+                </>
+                <>
+                  {type === 2 && (
+                    <Video
+                      ref={video}
+                      style={styles.video}
+                      source={video2}
+                      videoStyle={styles.videoStyle}
+                      useNativeControls={false}
+                      resizeMode={ResizeMode.STRETCH}
+                      shouldPlay
+                      isLooping
+                      isMuted={isMuted}
+                      onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+                    />
+                  )}
+                </>
+              </Box>
               <Text marginTop={2}>
                 Minha renda mensal é superior a 40.000 reais, às vezes 100.000
                 reais, às vezes 30.000 reais ou 40.000 reais. Muitas pessoas

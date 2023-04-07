@@ -98,7 +98,7 @@ const Button: React.FC<ButtonProps> = ({
         style={[styles.subtle, { backgroundColor: subtleBtnBg }, style]}
       >
         {leftElement}
-        <Text color={subtleBtnColor} allowFontScaling={false}>{otherProps.title}</Text>
+        <Text textAlign='center' width='100%' color={subtleBtnColor} allowFontScaling={false}>{otherProps.title}</Text>
         {rightElement}
       </TouchableOpacity>
     );
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   subtle: {
     paddingVertical: 5,
     paddingHorizontal: 11,
-    borderRadius: 11,
+    borderRadius: 4,
     flexDirection: "row",
     alignItems: "center",
   },

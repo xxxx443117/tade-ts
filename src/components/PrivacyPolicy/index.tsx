@@ -65,7 +65,7 @@ const PrivacyPolicy = () => {
           <Text>10. Lista de países nos quais a empresa não faz negócios</Text>
         </ScrollView>
         <Box mt='16px'>
-          <Button onPress={saveStorage} title={"concorde e continue"}></Button>
+          <Button variant="subtle" onPress={saveStorage} title={"concorde e continue"}></Button>
         </Box>
       </Box>
     </Center>
