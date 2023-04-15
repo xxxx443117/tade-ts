@@ -17,6 +17,12 @@
        * Extend the react-native-web reset:
        * https://github.com/necolas/react-native-web/blob/master/packages/react-native-web/src/exports/StyleSheet/initialRules.js
        */
+
+      div:focus, div:active, button:focus, button:active, a:focus, a:active {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        outline: none;
+      }
+
       html,
       body,
       #root {
